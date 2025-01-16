@@ -2,9 +2,6 @@ import edu.princeton.cs.algs4.In;
 
 public class Day07 {
 
-
-
-
     public static long part1I(In in) {
         long total = 0;
 
@@ -27,7 +24,6 @@ public class Day07 {
 
         return total;
     }
-
 
     private static boolean isValidEquation(long testValue, String[] numbers, String[] operators) {
 
@@ -76,7 +72,6 @@ public class Day07 {
 
         return result;
     }
-
 
     public static long part1R(In in) {
         return part1RHelper(in, 0);
