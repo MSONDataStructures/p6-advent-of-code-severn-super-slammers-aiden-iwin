@@ -79,11 +79,49 @@ public class Day07 {
 
 
     public static long part1R(In in) {
-        while (in.hasNextLine()) {
-            String lineIn = in.readLine();
-            // TODO: the magic happens here...recursively
+        return part1RHelper(in, 0);
+    }
+
+    private static long part1RHelper(In in, long total) {
+        if (!in.hasNextLine()) {
+            return total;
         }
-        return 0;
+
+        String lineIn = in.readLine().trim();
+        String[] parts = lineIn.split(":");
+        long testValue = Long.parseLong(parts[0].trim());
+        String[] numbers = parts[1].trim().split(" ");
+
+        String[] operators = {"+", "*"};
+        long validTestValue = 0;
+
+        if (isValidEquationRecursive(testValue, numbers, operators)) {
+            validTestValue = testValue;
+        }
+
+        return part1RHelper(in, total + validTestValue);
+    }
+
+    private static boolean isValidEquationRecursive(long testValue, String[] numbers, String[] operators) {
+        return isValidEquationHelper(testValue, numbers, operators, 0, new StringBuilder());
+    }
+
+    private static boolean isValidEquationHelper(long testValue, String[] numbers, String[] operators, int index, StringBuilder currentCombination) {
+        if (index == numbers.length - 1) {
+            String operatorCombination = currentCombination.toString();
+            long result = evaluate(numbers, operatorCombination);
+            return result == testValue;
+        }
+
+        for (String operator : operators) {
+            currentCombination.append(operator);
+            if (isValidEquationHelper(testValue, numbers, operators, index + 1, currentCombination)) {
+                return true;
+            }
+            currentCombination.setLength(currentCombination.length() - 1);
+        }
+
+        return false;
     }
 }
 
