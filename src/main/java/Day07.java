@@ -6,7 +6,7 @@ public class Day07 {
 
 
     public static long part1I(In in) {
-        long total = 0;  // Variable to accumulate the sum of valid test values
+        long total = 0;
 
         while (in.hasNextLine()) {
             String lineIn = in.readLine().trim();
@@ -19,7 +19,7 @@ public class Day07 {
 
 
             if (isValidEquation(testValue, numbers, operators)) {
-                validTestValue = testValue;  // If valid, add to total
+                validTestValue = testValue;
             }
 
             total += validTestValue;
